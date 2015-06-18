@@ -19,14 +19,13 @@ var user2 = {
 	3 ship hit
 
  */
-var board1 = [];
-var board2 = [];
+var board1 = new Array( 10 );
+var board2 = new Array( 10 );
 
 for( var i = 0; i < 10; i++ )
 {
-	board1[ i ] = [];
-	board2[ i ] = [];
-	
+	board1[ i ] = new Array( 10 );
+	board2[ i ] = new Array( 10 );
 	for( var j = 0; j < 10; j++ )
 	{
 		board1[ i ][ j ] = 0;
