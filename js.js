@@ -20,11 +20,16 @@ $( document ).ready( function()
 
 	$( document ).keypress( function( event )
 	{
-		if( shipReady )
-		{
+		if ( event.which == 13 && shipReady ) {
 			AddOrRemoveShips( coords[0], coords[1], true, "hoverShip" );
 			AddOrRemoveShips( coords[0], coords[1], false, "heldShip" );
 		}
+
+		if( event.which == 116 )
+		{
+			left = true;
+		}
+
 		event.preventDefault();
 		return false;
 	});
@@ -59,7 +64,7 @@ $( document ).ready( function()
 		for( var i = 0; i < selectedSize; i++ )
 		{
 			var element, x, y;
-			if( left )
+			if( !left )
 			{
 				x = parseInt( startX ) + i;
 				y = startY;
