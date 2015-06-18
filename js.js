@@ -32,7 +32,7 @@ $( document ).ready( function()
 		AddOrRemoveShips( coords[0], coords[1], false, selectedSize, true, "hoverShip" );
 	});
 
-	$( '#ships' ).click( function()
+	$( '.ships' ).click( function()
 	{
 		selectedSize = parseInt( $( this ).attr( 'size' ) );
 	});
