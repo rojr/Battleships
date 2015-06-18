@@ -47,6 +47,7 @@ io.sockets.on( 'connection', function( socket )
 	{
 		for( var i = 0; i < data.entry.length; i++ )
 		{
+			console.log( "size:" + data.entry.length );
 			console.log( data.entry );
 			var split = data.entry[ i ].split( "-" );
 			if( data.id == user1.id )

@@ -55,7 +55,7 @@ $( document ).ready( function()
 
 	function AddOrRemoveShips( startX, startY, remove, className )
 	{
-		var toPost = [];
+		var toPost = new Array();
 		for( var i = 0; i < selectedSize; i++ )
 		{
 			var element, x, y;
