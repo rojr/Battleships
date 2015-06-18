@@ -12,6 +12,11 @@
 		{
 			background-color: cyan;
 		}
+
+		.heldShip
+		{
+			background-color: green;
+		}
 	</style>
 </head>
 <body style="background-color: black; color:white; text-align:center">
