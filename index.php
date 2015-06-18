@@ -42,7 +42,7 @@
 			{
 				if( $j != 0 )
 				{
-					print '<div id="y' . $i . '-' . $j . '" class="personal-ships" style="float:left; width: 40px; height:40px; border: white 1px solid" ></div>';
+					print '<div id="y' . $i - 1 . '-' . $j - 1 . '" class="personal-ships" style="float:left; width: 40px; height:40px; border: white 1px solid" ></div>';
 				}
 			}
 		}
@@ -77,7 +77,7 @@
 			{
 				if( $j != 0 )
 				{
-					print '<div id="e' . $i . '-' . $j . '" class="click-cell" style="float:left; width: 40px; height:40px; border: white 1px solid" ></div>';
+					print '<div id="e' . $i - 1 . '-' . $j - 1 . '" class="click-cell" style="float:left; width: 40px; height:40px; border: white 1px solid" ></div>';
 				}
 			}
 		}
