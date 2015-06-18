@@ -19,18 +19,21 @@ var user2 = {
 	3 ship hit
 
  */
-var board1 = new Array( 10 );
-var board2 = new Array( 10 );
+var board1 = clearBoard();
+var board2 = clearBoard();
 
-for( var i = 0; i < 10; i++ )
+function clearBoard()
 {
-	board1[ i ] = new Array( 10 );
-	board2[ i ] = new Array( 10 );
-	for( var j = 0; j < 10; j++ )
+	var temp = new Array( 10 )
+	for( var i = 0; i < 10; i++ )
 	{
-		board1[ i ][ j ] = 0;
-		board2[ i ][ j ] = 0;
+		temp[ i ] = new Array( 10 );
+		for( var j = 0; j < 10; j++ )
+		{
+			temp[ i ][ j ] = 0;
+		}
 	}
+	return temp;
 }
 
 io.sockets.on( 'connection', function( socket )
@@ -96,10 +99,12 @@ io.sockets.on( 'connection', function( socket )
 		if( data.id == user1 )
 		{
 			user1 = 0;
+			board1 = clearBoard();
 		}
 		else
 		{
 			user2 = 0;
+			board2 = clearBoard();
 		}
 		console.log( "quit" );
 	});
