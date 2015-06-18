@@ -13,7 +13,8 @@
 	<h1 style="color: white"><?php ?></h1>
 </div>
 <?php
-	print '<div style="width: 500px; position:relative; padding: 0px; margin: 0px" >';
+	print '<h1>Your board</h1>';
+	print '<div style="width: 500px; position:relative; padding: 0; margin: 0" >';
 	for( $i = 0; $i < 11; $i++ )
 	{
 		if( $i != 0 )
@@ -36,6 +37,9 @@
 		}
 	}
 	print '</div>';
+
+	print '<h1>Enemy ship</h1>';
+
 ?>
 </body>
 </html>
