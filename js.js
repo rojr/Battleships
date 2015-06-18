@@ -44,11 +44,11 @@ $( document ).ready( function()
 			var element;
 			if( left )
 			{
-				element = $( '#y' + ( startX + i ) + "-" + startY );
+				element = $( '#y' + ( parseInt( startX ) + i ) + "-" + startY );
 			}
 			else
 			{
-				element = $( '#y' + startX + "-" + ( startY + i ) );
+				element = $( '#y' + startX + "-" + ( parseInt( startY ) + i ) );
 			}
 
 			if( element.length == 0 ) return;
