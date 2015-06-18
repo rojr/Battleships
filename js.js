@@ -27,7 +27,7 @@ $( document ).ready( function()
 
 		if( event.which == 116 )
 		{
-			left = true;
+			left = !left;
 		}
 
 		event.preventDefault();
