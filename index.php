@@ -7,6 +7,12 @@
 	<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="/js.js"></script>
+	<style>
+		.hoverShip
+		{
+			background-color: cyan;
+		}
+	</style>
 </head>
 <body style="background-color: black; color:white; text-align:center">
 <div style="width=100%; text-align:center;">
@@ -38,6 +44,11 @@
 	}
 	print '</div>';
 
+	?>
+	<div class="ship-selection">
+
+	</div>
+	<?php
 	print '<h1>Enemy board</h1>';
 
 	print '<div style="width: 500px; height:500px; position:relative; padding: 0; margin: 0" >';
