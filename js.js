@@ -23,12 +23,12 @@ $( document ).ready( function()
 
 	$( '.personal-ships' ).hover( function()
 	{
-		var coords = $( this ).attr( 'id' ).split( '-' );
+		var coords = $( this ).attr( 'id').replace( 'y', '' ).split( '-' );
 		AddOrRemoveShips( coords[0], coords[1], false, selectedSize, false, "hoverShip" );
 	},
 	function()
 	{
-		var coords = $( this ).attr( 'id' ).split( '-' );
+		var coords = $( this ).attr( 'id').replace( 'y', '' ).split( '-' );
 		AddOrRemoveShips( coords[0], coords[1], false, selectedSize, true, "hoverShip" );
 	});
 
@@ -44,11 +44,11 @@ $( document ).ready( function()
 			var element;
 			if( left )
 			{
-				element = $( '#' + ( startX + i ) + "-" + startY );
+				element = $( '#y' + ( startX + i ) + "-" + startY );
 			}
 			else
 			{
-				element = $( '#' + startX + "-" + ( startY + i ) );
+				element = $( '#y' + startX + "-" + ( startY + i ) );
 			}
 
 			if( element.length == 0 ) return;
