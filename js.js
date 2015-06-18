@@ -85,7 +85,7 @@ $( document ).ready( function()
 
 			if( className == "heldShip" )
 			{
-				toPost.add( x + "-" + y );
+				toPost.push( x + "-" + y );
 			}
 		}
 
