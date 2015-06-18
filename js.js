@@ -14,6 +14,20 @@ socket.on( 'shoot', function( data )
 $( document ).ready( function()
 {
 	var selectedSize = 0;
+	var left = false;
+	var shipReady = false;
+	var coords = "";
+
+	$( document ).keypress( function( event )
+	{
+		if( shipReady )
+		{
+			AddOrRemoveShips( coords[0], coords[1], true, "hoverShip" );
+			AddOrRemoveShips( coords[0], coords[1], false, "heldShip" );
+		}
+		event.preventDefault();
+		return false;
+	});
 
 	$( '.click-cell' ).click( function()
 	{
@@ -23,13 +37,15 @@ $( document ).ready( function()
 
 	$( '.personal-ships' ).hover( function()
 	{
-		var coords = $( this ).attr( 'id').replace( 'y', '' ).split( '-' );
-		AddOrRemoveShips( coords[0], coords[1], false, selectedSize, false, "hoverShip" );
+		coords = $( this ).attr( 'id').replace( 'y', '' ).split( '-' );
+		AddOrRemoveShips( coords[0], coords[1], false, "hoverShip" );
+		shipReady = true;
 	},
 	function()
 	{
-		var coords = $( this ).attr( 'id').replace( 'y', '' ).split( '-' );
-		AddOrRemoveShips( coords[0], coords[1], false, selectedSize, true, "hoverShip" );
+		coords = $( this ).attr( 'id').replace( 'y', '' ).split( '-' );
+		AddOrRemoveShips( coords[0], coords[1], true, "hoverShip" );
+		shipReady = false;
 	});
 
 	$( '.ships' ).click( function()
@@ -37,21 +53,26 @@ $( document ).ready( function()
 		selectedSize = parseInt( $( this ).attr( 'size' ) );
 	});
 
-	function AddOrRemoveShips( startX, startY, left, size, remove, className )
+	function AddOrRemoveShips( startX, startY, remove, className )
 	{
-		for( var i = 0; i < size; i++ )
+		var toPost = [];
+		for( var i = 0; i < selectedSize; i++ )
 		{
-			var element;
+			var element, x, y;
 			if( left )
 			{
-				element = $( '#y' + ( parseInt( startX ) + i ) + "-" + startY );
+				x = parseInt( startX ) + i;
+				y = startY;
+				element = $( '#y' + x + "-" + y );
 			}
 			else
 			{
-				element = $( '#y' + startX + "-" + ( parseInt( startY ) + i ) );
+				x = startX;
+				y = ( parseInt( startY ) + i );
+				element = $( '#y' + x + "-" + y );
 			}
 
-			if( element.length == 0 ) return;
+			if( element.length == 0 ) continue;
 
 			if( remove )
 			{
@@ -61,6 +82,16 @@ $( document ).ready( function()
 			{
 				element.addClass( className );
 			}
+
+			if( className == "heldShip" )
+			{
+				toPost.add( x + "-" + y );
+			}
+		}
+
+		if( toPost.length != 0 )
+		{
+			socket.emit( 'logShip', { entry : toPost, id : id });
 		}
 	}
 });
