@@ -19,8 +19,20 @@ var user2 = {
 	3 ship hit
 
  */
-var board1 = [10][10];
-var board2 = [10][10];
+var board1 = [];
+var board2 = [];
+
+for( var i = 0; i < 10; i++ )
+{
+	board1[ i ] = [];
+	board2[ i ] = [];
+	
+	for( var j = 0; j < 10; j++ )
+	{
+		board1[ i ][ j ] = 0;
+		board2[ i ][ j ] = 0;
+	}
+}
 
 io.sockets.on( 'connection', function( socket )
 {
