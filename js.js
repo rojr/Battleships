@@ -13,6 +13,8 @@ socket.on( 'shoot', function( data )
 
 $( document ).ready( function()
 {
+	var selectedSize = 0;
+
 	$( '.click-cell' ).click( function()
 	{
 		socket.emit( 'shoot', { id : $( this ).attr( 'id' ) } );
@@ -21,12 +23,46 @@ $( document ).ready( function()
 
 	$( '.personal-ships' ).hover( function()
 	{
-		$( this ).addClass( 'hoverShip' )
+		var coords = $( this ).attr( 'id' ).split( '-' );
+		AddOrRemoveShips( coords[0], coords[1], false, selectedSize, false, "hoverShip" );
 	},
 	function()
 	{
-		$( this ).removeClass( 'hoverShip' );
-	})
+		var coords = $( this ).attr( 'id' ).split( '-' );
+		AddOrRemoveShips( coords[0], coords[1], false, selectedSize, true, "hoverShip" );
+	});
+
+	$( '#ships' ).click( function()
+	{
+		selectedSize = parseInt( $( this ).attr( 'size' ) );
+	});
+
+	function AddOrRemoveShips( startX, startY, left, size, remove, className )
+	{
+		for( var i = 0; i < size; i++ )
+		{
+			var element;
+			if( left )
+			{
+				element = $( '#' + ( startX + i ) + "-" + startY );
+			}
+			else
+			{
+				element = $( '#' + startX + "-" + ( startY + i ) );
+			}
+
+			if( element.length == 0 ) return;
+
+			if( remove )
+			{
+				element.removeClass( className );
+			}
+			else
+			{
+				element.addClass( className );
+			}
+		}
+	}
 });
 
 window.onbeforeunload = function( e )

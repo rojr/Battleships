@@ -46,7 +46,10 @@
 
 	?>
 	<div class="ship-selection">
-
+		<p size="5" class="ships" id="five">Five</p>
+		<p size="4" class="ships" id="four">Four</p>
+		<p size="3" class="ships" id="three">Three</p>
+		<p size="2" class="ships" id="two">Two</p>
 	</div>
 	<?php
 	print '<h1>Enemy board</h1>';
