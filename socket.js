@@ -2,11 +2,13 @@ var io = require( './socket.io/' ).listen( 1337 );
 
 var user1 = {
 	id : 0,
-	ready : false
+	ready : false,
+	shipsLogged : 0
 };
 var user2 = {
 	id : 0,
-	ready : false
+	ready : false,
+	shipsLogged : 0
 };
 
 /*
@@ -49,10 +51,23 @@ io.sockets.on( 'connection', function( socket )
 			if( data.id == user1.id )
 			{
 				board1[ split[0] ][ split[ 1] ] = 2;
+				if( user1.shipsLogged < 30 )
+				{
+					user1.shipsLogged++;
+					user1.ready = true;
+				}
 			}
 			else
 			{
 				board2[ split[0] ][ split[ 1] ] = 2;
+				if( user2.shipsLogged < 30 )
+				{
+					user2.shipsLogged++;
+				}
+				else
+				{
+					user2.ready = true;
+				}
 			}
 		}
 	});
@@ -77,4 +92,4 @@ io.sockets.on( 'connection', function( socket )
 	});
 
 	console.log( "works" );
-})
+});
