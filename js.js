@@ -60,6 +60,10 @@ $( document ).ready( function()
 
 	function AddOrRemoveShips( startX, startY, remove, className )
 	{
+		$( '.hoverShip').each( function()
+		{
+			$( this ).removeClass( 'hoverShip' );
+		});
 		var toPost = new Array();
 		for( var i = 0; i < selectedSize; i++ )
 		{
