@@ -31,7 +31,7 @@
 			{
 				if( $j != 0 )
 				{
-					print '<div id="y' . $i . '-' . $j . '" style="float:left; width: 40px; height:40px; border: white 1px solid" ></div>';
+					print '<div id="y' . $i . '-' . $j . '" class="personal-ships" style="float:left; width: 40px; height:40px; border: white 1px solid" ></div>';
 				}
 			}
 		}

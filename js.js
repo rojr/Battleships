@@ -18,6 +18,15 @@ $( document ).ready( function()
 		socket.emit( 'shoot', { id : $( this ).attr( 'id' ) } );
 		$( this ).css( 'background-color' , 'red' );
 	});
+
+	$( '.personal-ships' ).hover( function()
+	{
+		$( this ).addClass( 'hoverShip' )
+	},
+	function()
+	{
+		$( this ).removeClass( 'hoverShip' );
+	})
 });
 
 window.onbeforeunload = function( e )
