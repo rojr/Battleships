@@ -35,11 +35,11 @@ $( document ).ready( function()
 			AddOrRemoveShips( coords[0], coords[1], true, "hoverShip" );
 			AddOrRemoveShips( coords[0], coords[1], false, "heldShip" );
 
-			var selectedSize = $( '#ship-place-' + selectedSize );
-			selectedSize.html( parseInt( selectedSize.html() ) - 1 );
-			if( selectedSize.html() == "0" )
+			var sizeSelection = $( '#ship-place-' + selectedSize );
+			sizeSelection.html( parseInt( sizeSelection.html() ) - 1 );
+			if( sizeSelection.html() == "0" )
 			{
-				selectedSize.remove();
+				sizeSelection.remove();
 			}
 		}
 
