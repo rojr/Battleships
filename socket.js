@@ -83,7 +83,7 @@ io.sockets.on( 'connection', function( socket )
 
 	socket.on( 'shoot', function( data )
 	{
-		if( turn == GetUser().id )
+		if( turn == data.user )
 		{
 			console.log( data.id + " shot " );
 
@@ -102,7 +102,7 @@ io.sockets.on( 'connection', function( socket )
 				socket.emit( 'shoot', { type : 'miss', id : "e" + data.id  } )
 			}
 			GetOtherUser().socket.emit( 'turn' );
-			GetUser().socket.emit( 'notTurn' );
+			GetUser( data.user ).socket.emit( 'notTurn' );
 		}
 	});
 
@@ -164,7 +164,7 @@ function GetOtherUser( id )
 	}
 }
 
-function SwitchTurn( $id )
+function SwitchTurn( id )
 {
-	turn = GetOtherUser( $id ).id;
+	turn = GetOtherUser( id ).id;
 }
