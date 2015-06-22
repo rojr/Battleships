@@ -51,10 +51,10 @@
 
 	?>
 	<div class="ship-selection">
-		<p size="5" class="ships" id="five">Five</p>
-		<p size="4" class="ships" id="four">Four</p>
-		<p size="3" class="ships" id="three">Three</p>
-		<p size="2" class="ships" id="two">Two</p>
+		<p size="5" class="ships" id="five">Five x <span>1</span></p>
+		<p size="4" class="ships" id="four">Four x <span>2</span></p>
+		<p size="3" class="ships" id="three">Three x <span>3</span></p>
+		<p size="2" class="ships" id="two">Two x <span>4</span></p>
 	</div>
 	<?php
 	print '<h1>Enemy board</h1>';
