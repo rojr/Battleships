@@ -94,11 +94,20 @@ io.sockets.on( 'connection', function( socket )
 	{
 		console.log( data.id + " shot " );
 
-		turn = data.id == user1.id ? 2 : 1;
+		turn = data.user == user1.id ? 2 : 1;
 
 		data.id = data.id.replace( 'e', '' );
 
 		socket.broadcast.emit( 'shoot', data );
+
+		if( PlayerShoot( data.user, data.id ) )
+		{
+			socket.emit( 'shoot', { type : 'hit', id : "e" + data.id } );
+		}
+		else
+		{
+			socket.emit( 'shoot', { type : 'miss', id : "e" + data.id  } )
+		}
 	});
 
 	socket.on( 'quit', function( data )
@@ -115,6 +124,41 @@ io.sockets.on( 'connection', function( socket )
 		}
 		console.log( "quit" );
 	});
-
-	console.log( "works" );
 });
+
+function PlayerShoot( player, coordinates )
+{
+	var exploded = coordinates.split( '-' );
+	var x = exploded[ 0], y = exploded[ 1 ];
+
+	if( player == user1.id )
+	{
+		switch( board1[ x ][ y ] )
+		{
+			case 0:
+			case 1:
+				board1[ x ][ y ] = 1;
+				return false;
+			case 2:
+				board1[ x ][ y ] = 3;
+				return true;
+			default:
+				return true;
+		}
+	}
+	else
+	{
+		switch( board2[ x ][ y ] )
+		{
+			case 0:
+			case 1:
+				board2[ x ][ y ] = 1;
+				return false;
+			case 2:
+				board2[ x ][ y ] = 3;
+				return true;
+			default:
+				return true;
+		}
+	}
+}

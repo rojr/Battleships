@@ -8,9 +8,16 @@ socket.on( 'ready', function()
 
 socket.on( 'shoot', function( data )
 {
-	$( "#y" + data.id).addClass( 'fired' );
-	$( "#y" + data.id).html( 'X' );
-	$( "#y" + data.id).removeClass( 'heldShip' );
+	$( "#" + data.id ).addClass( 'fired' );
+	if( data.type == "miss" )
+	{
+		$( "#" + data.id ).html( 'Hit!' );
+	}
+	else
+	{
+		$( "#" + data.id ).html( 'X' );
+	}
+	$( "#" + data.id ).removeClass( 'heldShip' );
 });
 
 $( document ).ready( function()
@@ -39,8 +46,7 @@ $( document ).ready( function()
 
 	$( '.click-cell' ).click( function()
 	{
-		socket.emit( 'shoot', { id : $( this ).attr( 'id' ) } );
-		$( this ).css( 'background-color' , 'red' );
+		socket.emit( 'shoot', { id : $( this ).attr( 'id' ), user : id } );
 	});
 
 	$( '.personal-ships' ).hover( function()
