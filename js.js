@@ -63,8 +63,13 @@ $( document ).ready( function()
 	{
 		$( '.hoverShip').each( function()
 		{
-			$( this ).removeClass( 'hoverShip errorShip' );
+			$( this ).removeClass( 'hoverShip' );
 		});
+		$( '.errorShip').each( function()
+		{
+			$( this ).removeClass( 'errorShip' );
+		});
+
 		var toPost = new Array();
 		var canShipBePlaced = true;
 		for( var i = 0; i < selectedSize; i++ )
@@ -73,12 +78,12 @@ $( document ).ready( function()
 			if( !left )
 			{
 				x = parseInt( startX ) + i;
-				y = startY;
+				y = parseInt( startY );
 				element = $( '#y' + x + "-" + y );
 			}
 			else
 			{
-				x = startX;
+				x = parseInt( startX );
 				y = ( parseInt( startY ) + i );
 				element = $( '#y' + x + "-" + y );
 			}
@@ -105,7 +110,7 @@ $( document ).ready( function()
 			if( className == "heldShip" )
 			{
 				toPost.push( x + "-" + y );
-				board.push( { x : x, y : y } );
+				board.push( { 'x' : x, 'y' : y } );
 			}
 		}
 
