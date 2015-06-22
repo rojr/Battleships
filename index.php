@@ -27,6 +27,11 @@
 		{
 			background-color: red;
 		}
+
+		.fired
+		{
+			border: red 1px dashed;
+		}
 	</style>
 </head>
 <body style="background-color: black; color:white; text-align:center">

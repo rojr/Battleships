@@ -8,7 +8,8 @@ socket.on( 'ready', function()
 
 socket.on( 'shoot', function( data )
 {
-	$( "#" + data.id ).css( 'background-color', 'red' );
+	$( "#y" + data.id).addClass( 'fired' );
+	$( "#y" + data.id).removeClass( 'heldShip' );
 });
 
 $( document ).ready( function()

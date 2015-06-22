@@ -22,9 +22,11 @@ var user2 = {
 var board1 = clearBoard();
 var board2 = clearBoard();
 
+var turn = 1;
+
 function clearBoard()
 {
-	var temp = new Array( 10 )
+	var temp = new Array( 10 );
 	for( var i = 0; i < 10; i++ )
 	{
 		temp[ i ] = new Array( 10 );
@@ -92,7 +94,10 @@ io.sockets.on( 'connection', function( socket )
 
 	socket.on( 'shoot', function( data )
 	{
-		console.log( data.id );
+		console.log( data.id + " shot " );
+
+		turn = data.id == user1.id ? 2 : 1;
+
 		socket.broadcast.emit( 'shoot', data );
 	});
 
