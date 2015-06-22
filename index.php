@@ -17,6 +17,16 @@
 		{
 			background-color: green;
 		}
+
+		.ships
+		{
+			border: white 2px solid;
+		}
+
+		.errorShip
+		{
+			background-color: red;
+		}
 	</style>
 </head>
 <body style="background-color: black; color:white; text-align:center">

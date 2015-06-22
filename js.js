@@ -17,6 +17,7 @@ $( document ).ready( function()
 	var left = false;
 	var shipReady = false;
 	var coords = "";
+	var board = [];
 
 	$( document ).keypress( function( event )
 	{
@@ -62,9 +63,10 @@ $( document ).ready( function()
 	{
 		$( '.hoverShip').each( function()
 		{
-			$( this ).removeClass( 'hoverShip' );
+			$( this ).removeClass( 'hoverShip errorShip' );
 		});
 		var toPost = new Array();
+		var canShipBePlaced = true;
 		for( var i = 0; i < selectedSize; i++ )
 		{
 			var element, x, y;
@@ -83,6 +85,12 @@ $( document ).ready( function()
 
 			if( element.length == 0 ) continue;
 
+			if( canShipBePlaced && !CanShipBePlaced( x, y ) )
+			{
+				canShipBePlaced = false;
+				className += " errorShip";
+			}
+
 			if( remove )
 			{
 				element.removeClass( className );
@@ -95,6 +103,7 @@ $( document ).ready( function()
 			if( className == "heldShip" )
 			{
 				toPost.push( x + "-" + y );
+				board.push( { x : x, y : y } );
 			}
 		}
 
@@ -102,6 +111,20 @@ $( document ).ready( function()
 		{
 			socket.emit( 'logShip', { entry : toPost, id : id });
 		}
+	}
+
+	function CanShipBePlaced( x, y )
+	{
+		var occupied = false;
+		for( var i = 0; i < board.length; i++ )
+		{
+			if( board[ i ].x == x || board[ i ].y == y )
+			{
+				occupied = false;
+				break;
+			}
+		}
+		return ( x <= 10 && y <= 10 ) || occupied;
 	}
 });
 
