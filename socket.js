@@ -89,9 +89,12 @@ io.sockets.on( 'connection', function( socket )
 
 			SwitchTurn( data.user );
 
-			data.id = data.id.replace( 'e', '' );
+
+			data.id = data.id.replace( 'e', 'y' );
 
 			socket.broadcast.emit( 'shoot', data );
+
+			data.id = data.id.replace( 'y', '' );
 
 			if( PlayerShoot( data.user, data.id ) )
 			{
@@ -134,6 +137,14 @@ function PlayerShoot( player, coordinates )
 			return false;
 		case 2:
 			user.map[ x ][ y ] = 3;
+			user.shipBlocks--;
+			if( user.shipBlocks <= 0 )
+			{
+				socket.broadcast.emit( 'lost' );
+				socket.emit( 'won' );
+				user1 = new GenericUser();
+				user2 = new GenericUser();
+			}
 			return true;
 		default:
 			return true;

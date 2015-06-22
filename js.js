@@ -31,6 +31,16 @@ socket.on( 'notTurn', function()
 	$( '#gameStatus').html( 'It\'s not your turn!' );
 });
 
+socket.on( 'won', function()
+{
+	alert( 'Congratulations... you won!' );
+});
+
+socket.on( 'lost', function()
+{
+	alert( 'Aw... you lost :(' )
+});
+
 $( document ).ready( function()
 {
 	var selectedSize = 0;
