@@ -144,7 +144,7 @@ function GetUser( id )
 	}
 }
 
-function GetOtherUser( $id )
+function GetOtherUser( id )
 {
 	if( id != user1.id )
 	{
