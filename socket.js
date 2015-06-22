@@ -1,26 +1,26 @@
 var io = require( './socket.io/' ).listen( 1337 );
 
-var user1 = {
-	id : 0,
-	ready : false,
-	shipsLogged : 0
-};
-var user2 = {
-	id : 0,
-	ready : false,
-	shipsLogged : 0
-};
-
 /*
-	0 empty
-	1 miss hit
-	2 ship safe
-	3 ship hit
+	Generic user var to create users and make them a bit more functional
  */
-var board1 = clearBoard();
-var board2 = clearBoard();
+var GenericUser = {
+	id : 0,
+	socket : null,
+	ready : false,
+	map : clearBoard(),
+	shipBlocks : 0
+};
 
-var turn = 1;
+//ID generated when both players are ready
+var turn = 0;
+/*
+ 0 empty
+ 1 miss hit
+ 2 ship safe
+ 3 ship hit
+ */
+var user1 = new GenericUser;
+var user2 = new GenericUser;
 
 function clearBoard()
 {
@@ -38,19 +38,22 @@ function clearBoard()
 
 io.sockets.on( 'connection', function( socket )
 {
+	console.log( socket );
 	socket.on( 'register', function( data )
 	{
-		console.log( data.id );
-		if( user1 != 0 )
+		console.log( "New user joined" );
+		if( user1.id != 0 )
 		{
 			user2.id = data.id;
+			user2.socket = socket;
 		}
 		else
 		{
 			user1.id = data.id;
+			user1.socket = socket;
 		}
 
-		if( user1 != 0 && user2 != 0 )
+		if( user1.id != 0 && user2.id != 0 )
 		{
 			socket.broadcast.emit( 'ready' );
 			socket.emit( 'ready' );
@@ -62,39 +65,24 @@ io.sockets.on( 'connection', function( socket )
 		for( var i = 0; i < data.entry.length; i++ )
 		{
 			var split = data.entry[ i ].split( "-" );
-			if( data.id == user1.id )
+			var user = GetUser( data.id );
+			user.map[ split[ 0 ] ][ split[ 1 ] ] = 2;
+			user.shipBlocks++;
+			if( user.shipBlocks == 30 )
 			{
-				board1[ split[0] ][ split[ 1] ] = 2;
-				if( user1.shipsLogged < 30 )
-				{
-					user1.shipsLogged++;
-					user1.ready = true;
-				}
-			}
-			else
-			{
-				board2[ split[0] ][ split[ 1] ] = 2;
-				if( user2.shipsLogged < 30 )
-				{
-					user2.shipsLogged++;
-				}
-				else
-				{
-					user2.ready = true;
-				}
+				user.ready = true;
+				break;
 			}
 		}
 
-		console.log( board1 );
-
-		console.log( board2 );
+		console.log( user.map );
 	});
 
 	socket.on( 'shoot', function( data )
 	{
 		console.log( data.id + " shot " );
 
-		turn = data.user == user1.id ? 2 : 1;
+		SwitchTurn( data.user );
 
 		data.id = data.id.replace( 'e', '' );
 
@@ -114,13 +102,11 @@ io.sockets.on( 'connection', function( socket )
 	{
 		if( data.id == user1 )
 		{
-			user1 = 0;
-			board1 = clearBoard();
+			user1 = new GenericUser;
 		}
 		else
 		{
-			user2 = 0;
-			board2 = clearBoard();
+			user2 = new GenericUser;
 		}
 		console.log( "quit" );
 	});
@@ -131,34 +117,46 @@ function PlayerShoot( player, coordinates )
 	var exploded = coordinates.split( '-' );
 	var x = exploded[ 0], y = exploded[ 1 ];
 
-	if( player == user1.id )
+	var user = GetUser( player );
+	switch( user.map[ x ][ y ] )
 	{
-		switch( board1[ x ][ y ] )
-		{
-			case 0:
-			case 1:
-				board1[ x ][ y ] = 1;
-				return false;
-			case 2:
-				board1[ x ][ y ] = 3;
-				return true;
-			default:
-				return true;
-		}
+		case 0:
+		case 1:
+			user.map[ x ][ y ] = 1;
+			return false;
+		case 2:
+			user.map[ x ][ y ] = 3;
+			return true;
+		default:
+			return true;
+	}
+}
+
+function GetUser( id )
+{
+	if( id == user1.id )
+	{
+		return user1;
 	}
 	else
 	{
-		switch( board2[ x ][ y ] )
-		{
-			case 0:
-			case 1:
-				board2[ x ][ y ] = 1;
-				return false;
-			case 2:
-				board2[ x ][ y ] = 3;
-				return true;
-			default:
-				return true;
-		}
+		return user2;
 	}
+}
+
+function GetOtherUser( $id )
+{
+	if( id != user1.id )
+	{
+		return user1;
+	}
+	else
+	{
+		return user2;
+	}
+}
+
+function SwitchTurn( $id )
+{
+	turn = GetOtherUser( $id ).id;
 }
