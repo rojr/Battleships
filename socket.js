@@ -12,12 +12,10 @@ var user2 = {
 };
 
 /*
-
 	0 empty
 	1 miss hit
 	2 ship safe
 	3 ship hit
-
  */
 var board1 = clearBoard();
 var board2 = clearBoard();
@@ -99,7 +97,7 @@ io.sockets.on( 'connection', function( socket )
 		turn = data.id == user1.id ? 2 : 1;
 
 		data.id = data.id.replace( 'e', '' );
-		
+
 		socket.broadcast.emit( 'shoot', data );
 	});
 

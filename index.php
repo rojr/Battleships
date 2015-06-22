@@ -30,7 +30,7 @@
 
 		.fired
 		{
-			border: red 1px dashed;
+			background-color: darkred;
 		}
 	</style>
 </head>

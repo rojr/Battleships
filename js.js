@@ -9,6 +9,7 @@ socket.on( 'ready', function()
 socket.on( 'shoot', function( data )
 {
 	$( "#y" + data.id).addClass( 'fired' );
+	$( "#y" + data.id).html( 'X' );
 	$( "#y" + data.id).removeClass( 'heldShip' );
 });
 
