@@ -32,6 +32,11 @@
 		{
 			background-color: darkred;
 		}
+
+		.hit
+		{
+			background-color: green;
+		}
 	</style>
 </head>
 <body style="background-color: black; color:white; text-align:center">
@@ -66,10 +71,10 @@
 
 	?>
 	<div class="ship-selection">
-		<p size="5" class="ships" id="five">Five x <span>1</span></p>
-		<p size="4" class="ships" id="four">Four x <span>2</span></p>
-		<p size="3" class="ships" id="three">Three x <span>3</span></p>
-		<p size="2" class="ships" id="two">Two x <span>4</span></p>
+		<p size="5" class="ships" id="ship-place-5">Five x <span>1</span></p>
+		<p size="4" class="ships" id="ship-place-4">Four x <span>2</span></p>
+		<p size="3" class="ships" id="ship-place-3">Three x <span>3</span></p>
+		<p size="2" class="ships" id="ship-place-2">Two x <span>4</span></p>
 	</div>
 	<?php
 	print '<h1>Enemy board</h1>';

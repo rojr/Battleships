@@ -9,8 +9,9 @@ socket.on( 'ready', function()
 socket.on( 'shoot', function( data )
 {
 	$( "#" + data.id ).addClass( 'fired' );
-	if( data.type == "Hit" )
+	if( data.type == "hit" )
 	{
+		$( "#" + data.id ).addClass( 'hit' );
 		$( "#" + data.id ).html( 'Hit!' );
 	}
 	else
@@ -33,6 +34,13 @@ $( document ).ready( function()
 		if ( event.which == 13 && shipReady ) {
 			AddOrRemoveShips( coords[0], coords[1], true, "hoverShip" );
 			AddOrRemoveShips( coords[0], coords[1], false, "heldShip" );
+
+			var selectedSize = $( '#ship-place-' + selectedSize );
+			selectedSize.html( parseInt( selectedSize.html() ) - 1 );
+			if( selectedSize.html() == "0" )
+			{
+				selectedSize.remove();
+			}
 		}
 
 		if( event.which == 116 )
