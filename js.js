@@ -9,7 +9,7 @@ socket.on( 'ready', function()
 socket.on( 'shoot', function( data )
 {
 	$( "#" + data.id ).addClass( 'fired' );
-	if( data.type == "miss" )
+	if( data.type == "Hit" )
 	{
 		$( "#" + data.id ).html( 'Hit!' );
 	}
