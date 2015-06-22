@@ -131,7 +131,7 @@ $( document ).ready( function()
 				break;
 			}
 		}
-		return ( x <= 10 && y <= 10 ) || occupied;
+		return ( x < 10 && y < 10 ) || occupied;
 	}
 });
 
