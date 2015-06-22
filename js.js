@@ -21,6 +21,16 @@ socket.on( 'shoot', function( data )
 	$( "#" + data.id ).removeClass( 'heldShip' );
 });
 
+socket.on( 'turn', function()
+{
+	$( '#gameStatus' ).html( 'It\'s your turn!' );
+});
+
+socket.on( 'notTurn', function()
+{
+	$( '#gameStatus').html( 'It\'s not your turn!' );
+});
+
 $( document ).ready( function()
 {
 	var selectedSize = 0;

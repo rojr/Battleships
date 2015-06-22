@@ -57,6 +57,9 @@ io.sockets.on( 'connection', function( socket )
 		{
 			socket.broadcast.emit( 'ready' );
 			socket.emit( 'ready' );
+			turn = user1.id;
+			user1.socket.emit( 'turn' );
+			user2.socket.emit( 'notTurn' );
 		}
 	});
 
@@ -80,21 +83,26 @@ io.sockets.on( 'connection', function( socket )
 
 	socket.on( 'shoot', function( data )
 	{
-		console.log( data.id + " shot " );
-
-		SwitchTurn( data.user );
-
-		data.id = data.id.replace( 'e', '' );
-
-		socket.broadcast.emit( 'shoot', data );
-
-		if( PlayerShoot( data.user, data.id ) )
+		if( turn == GetUser().id )
 		{
-			socket.emit( 'shoot', { type : 'hit', id : "e" + data.id } );
-		}
-		else
-		{
-			socket.emit( 'shoot', { type : 'miss', id : "e" + data.id  } )
+			console.log( data.id + " shot " );
+
+			SwitchTurn( data.user );
+
+			data.id = data.id.replace( 'e', '' );
+
+			socket.broadcast.emit( 'shoot', data );
+
+			if( PlayerShoot( data.user, data.id ) )
+			{
+				socket.emit( 'shoot', { type : 'hit', id : "e" + data.id } );
+			}
+			else
+			{
+				socket.emit( 'shoot', { type : 'miss', id : "e" + data.id  } )
+			}
+			GetOtherUser().socket.emit( 'turn' );
+			GetUser().socket.emit( 'notTurn' );
 		}
 	});
 
@@ -117,7 +125,7 @@ function PlayerShoot( player, coordinates )
 	var exploded = coordinates.split( '-' );
 	var x = exploded[ 0], y = exploded[ 1 ];
 
-	var user = GetUser( player );
+	var user = GetOtherUser( player );
 	switch( user.map[ x ][ y ] )
 	{
 		case 0:

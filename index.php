@@ -45,6 +45,7 @@
 </div>
 <?php
 	print '<h1>Your board</h1>';
+	print '<h1 id="gameStatus"></h1>';
 	print '<div style="width: 500px; height:500px; position:relative; padding: 0; margin: 0" >';
 	for( $i = 0; $i < 11; $i++ )
 	{
