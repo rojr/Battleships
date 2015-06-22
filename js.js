@@ -118,9 +118,9 @@ $( document ).ready( function()
 		var occupied = false;
 		for( var i = 0; i < board.length; i++ )
 		{
-			if( board[ i ].x == x || board[ i ].y == y )
+			if( board[ i ].x == x && board[ i ].y == y )
 			{
-				occupied = false;
+				occupied = true;
 				break;
 			}
 		}
