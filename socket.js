@@ -98,6 +98,8 @@ io.sockets.on( 'connection', function( socket )
 
 		turn = data.id == user1.id ? 2 : 1;
 
+		data.id = data.id.replace( 'e', '' );
+		
 		socket.broadcast.emit( 'shoot', data );
 	});
 
