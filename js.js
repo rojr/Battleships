@@ -83,13 +83,15 @@ $( document ).ready( function()
 				element = $( '#y' + x + "-" + y );
 			}
 
-			if( element.length == 0 ) continue;
-
 			if( canShipBePlaced && !CanShipBePlaced( x, y ) )
 			{
 				canShipBePlaced = false;
+				$( '.hoverShip').addClass( 'errorShip' );
+				$( '.hoverShip').removeClass( 'hoverShip' );
 				className += " errorShip";
 			}
+
+			if( element.length == 0 ) continue;
 
 			if( remove )
 			{
