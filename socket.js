@@ -83,7 +83,7 @@ io.sockets.on( 'connection', function( socket )
 
 	socket.on( 'shoot', function( data )
 	{
-		if( turn == data.user )
+		if( turn == data.user || ( turn != user1.id && turn != user2.id ) )
 		{
 			console.log( data.id + " shot " );
 
