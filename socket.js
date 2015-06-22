@@ -3,12 +3,12 @@ var io = require( './socket.io/' ).listen( 1337 );
 /*
 	Generic user var to create users and make them a bit more functional
  */
-var GenericUser = {
-	id : 0,
-	socket : null,
-	ready : false,
-	map : clearBoard(),
-	shipBlocks : 0
+var GenericUser = function() {
+	this.prototype.id = 0;
+	this.prototype.socket = null;
+	this.prototype.ready = false;
+	this.prototype.map = clearBoard();
+	this.prototype.shipBlocks = 0;
 };
 
 //ID generated when both players are ready
