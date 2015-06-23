@@ -128,8 +128,8 @@ $( document ).ready( function()
 			if( canShipBePlaced && !CanShipBePlaced( x, y ) )
 			{
 				canShipBePlaced = false;
-				$( '.hoverShip').addClass( 'errorShip' );
-				$( '.hoverShip').removeClass( 'hoverShip' );
+				$( '.hoverShip' ).addClass( 'errorShip' );
+				$( '.hoverShip' ).removeClass( 'hoverShip' );
 				className += " errorShip";
 			}
 
@@ -146,8 +146,11 @@ $( document ).ready( function()
 
 			if( className == "heldShip" )
 			{
-				toPost.push( x + "-" + y );
-				board.push( { 'x' : x, 'y' : y } );
+				if( canShipBePlaced )
+				{
+					toPost.push( x + "-" + y );
+					board.push( { 'x' : x, 'y' : y } );
+				}
 			}
 		}
 

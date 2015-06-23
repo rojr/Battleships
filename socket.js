@@ -104,7 +104,7 @@ io.sockets.on( 'connection', function( socket )
 			{
 				socket.emit( 'shoot', { type : 'miss', id : "e" + data.id  } )
 			}
-			GetOtherUser().socket.emit( 'turn' );
+			GetOtherUser( data.user ).socket.emit( 'turn' );
 			GetUser( data.user ).socket.emit( 'notTurn' );
 		}
 	});
